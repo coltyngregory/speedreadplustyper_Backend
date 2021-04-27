@@ -3,6 +3,8 @@ const app = express()
 const cors = require('cors')
 const PORT = 5000
 
+// https://www.npmjs.com/package/uuid
+
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -18,12 +20,7 @@ const preset = [
 	},
 ]
 
-const myPreset = [
-	{
-		title: "testing",
-		content: "This is just a test",
-	},
-]
+const myPreset = []
 
 app.get('/', (req, res) => {
 	res.send('Server is running')
@@ -35,11 +32,10 @@ app.get('/presets', (req, res) => {
 
 app.post('/addPreset', (req, res) => {
 	console.log('hitting')
-	console.log(req.body)
 	console.log(myPreset)
 	myPreset.push({ title: req.body.title, content: req.body.content })
 	console.log(myPreset)
-	res.json('wowie')
+	res.json(myPreset)
 })
 
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`))
